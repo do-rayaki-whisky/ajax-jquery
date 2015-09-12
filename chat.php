@@ -1,6 +1,7 @@
 <!doctype html>
-<html "en">
+<html lang="en">
 	<head>
+		<meta charset="utf-8">
 		<title>Ajax Tutorial</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	</head>
@@ -28,7 +29,7 @@
 				width: 600px;
 				margin: 0px auto;
 				border: 1px solid #eee;
-				min-height: 200px;
+				min-height: 400px;
 			}
 
 			#inputwrapper{
@@ -56,12 +57,44 @@
 		</style>
 		<script>
 
-			function sendajax(){
+			setInterval(function(){
+
+				updateChat();
+
+			}, 1000);
+
+			function updateChat(){
 
 				$.ajax({
 
-	
+					url:'process3.php',
+					type:'POST',
+					data:'chatUpdate=chat',
+					success:function(response){
 
+						$("#message").html(response);
+					}
+
+				});
+			}
+
+			function sendajax(){
+
+				var chatText = $("#enterchat").val();
+
+				$("#enterchat").val("");
+
+				$.ajax({
+
+					url:'process3.php',
+					type:'POST',
+					data:'chat='+chatText,
+					success:function(response){
+
+
+					}
+
+				});
 			}
 
 		</script>
